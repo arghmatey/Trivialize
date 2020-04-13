@@ -5,6 +5,9 @@ const logger = require('morgan');
 
 const app = express();
 
+require('dotenv').config();
+require('./config/database');
+
 app.use(logger('dev'));
 app.use(express.json());
 
@@ -12,7 +15,10 @@ app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
 // API routes under here
+app.use('/api/users', require('./routes/api/users'));
 
+app.use(require('./config/auth'));
+// login protected routes under here
 
 // This is the catch all. Comment can be deleted when ready.
 app.get('/*', function (req, res) {
