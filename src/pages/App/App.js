@@ -5,9 +5,9 @@ import { getQuestions } from '../../utils/questions-api';
 import NavBar from '../../components/NavBar/NavBar';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
-import QuestionsPage from '../QuestionsPage/QuestionsPage';
 import userService from '../../utils/userService';
 import tokenService from '../../utils/tokenService';
+import TriviaSelectForm from '../../components/TriviaSelectForm/TriviaSelectForm';
 
 
 class App extends Component {
@@ -55,12 +55,8 @@ class App extends Component {
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           } />
-          <Link to='/questions'>Test your knowledge</Link>
-          <Route exact path='/questions' render={(props) =>
-            <QuestionsPage
-              questions={this.questions}
-            />
-          } />
+          <TriviaSelectForm
+            questions={this.state.questions} />
         </main>
       </div>
     )
