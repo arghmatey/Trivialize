@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Link } from 'react-router-dom'
-import { getQuestions } from '../../utils/questions-api';
+import { getQuestions, selectCategory } from '../../utils/questions-api';
 import NavBar from '../../components/NavBar/NavBar';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -15,12 +15,14 @@ class App extends Component {
     super();
     this.state = {
       user: userService.getUser(),
-      questions: []
+      questions: [],
+      categories: []
     };
   }
 
   async componentDidMount() {
     const questions = await getQuestions();
+    const categories = await selectCategory();
     this.setState({ questions: questions.results });
   }
 
@@ -36,13 +38,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <header>
+        <header className="App-header">
           <NavBar
             user={this.state.user}
             handleLogout={this.handleLogout}
           />
         </header>
-        <main>
+        <main className="App-main">
           <Route exact path='/signup' render={({ history }) =>
             <SignupPage
               history={history}
@@ -55,10 +57,13 @@ class App extends Component {
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           } />
-          <TriviaSelectForm
-            questions={this.state.questions} />
+          <div className="App-component">
+            <TriviaSelectForm
+              questions={this.state.questions}
+              categories={this.state.categories} />
+          </div>
         </main>
-      </div>
+      </div >
     )
   }
 };

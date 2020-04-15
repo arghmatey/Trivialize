@@ -6,9 +6,10 @@ function QuestionsPage(props) {
         <>
             <h1>Questions</h1>
             <div>
-                {props.questions.map(question =>
+                {props.questions.map((question, idx) =>
                     <QuestionItem
                         question={question}
+                        key={idx}
                     />
                 )}
             </div>
