@@ -6,7 +6,6 @@ const logger = require('morgan');
 require('dotenv').config();
 require('./config/database');
 
-const questionsRouter = require('./routes/api/questions');
 const app = express();
 
 app.use(logger('dev'));
@@ -17,7 +16,6 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // API routes under here
 app.use('/api/users', require('./routes/api/users'));
-app.use('/api/questions', questionsRouter);
 
 app.use(require('./config/auth'));
 // login protected routes under here

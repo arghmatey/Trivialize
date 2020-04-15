@@ -6,9 +6,9 @@ function TriviaSelectForm(props) {
     return (
         <>
             <select>
-                {props.categories.map(category =>
+                {props.categories.map((category, idx) =>
                     <option
-                        value={category.id}>{category.name}</option>
+                        value={category.id} key={idx}>{category.name}</option>
                 )}
             </select>
             <Link to='/questions'>Test your knowledge</Link>

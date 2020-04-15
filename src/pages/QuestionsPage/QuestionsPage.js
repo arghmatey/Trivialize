@@ -4,7 +4,7 @@ import QuestionItem from '../../components/QuestionItem/QuestionItem';
 function QuestionsPage(props) {
     return (
         <>
-            <h1>Questions</h1>
+            <h2>Question **0** / 10</h2>
             <div>
                 {props.questions.map((question, idx) =>
                     <QuestionItem

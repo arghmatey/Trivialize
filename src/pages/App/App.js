@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { getQuestions, selectCategory } from '../../utils/questions-api';
 import NavBar from '../../components/NavBar/NavBar';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
-import tokenService from '../../utils/tokenService';
 import TriviaSelectForm from '../../components/TriviaSelectForm/TriviaSelectForm';
 
 
@@ -22,8 +21,13 @@ class App extends Component {
 
   async componentDidMount() {
     const questions = await getQuestions();
+    console.log(questions);
     const categories = await selectCategory();
-    this.setState({ questions: questions.results });
+    console.log(categories);
+    this.setState({
+      questions: questions.results,
+      categories: categories.trivia_categories
+    });
   }
 
   handleLogout = () => {
@@ -39,6 +43,7 @@ class App extends Component {
     return (
       <div>
         <header className="App-header">
+          TRIVIALIZE
           <NavBar
             user={this.state.user}
             handleLogout={this.handleLogout}
