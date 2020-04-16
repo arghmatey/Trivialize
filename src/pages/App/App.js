@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route } from 'react-router-dom'
-import { getQuestions, selectCategory } from '../../utils/questions-api';
+import * as questionAPI from '../../utils/questions-api';
+import * as triviaAPI from '../../utils/trivias-api';
 import NavBar from '../../components/NavBar/NavBar';
+import TriviaListPage from '../TriviaListPage/TriviaListPage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
@@ -14,20 +16,18 @@ class App extends Component {
     super();
     this.state = {
       user: userService.getUser(),
+      trivias: [],
       questions: [],
       categories: []
     };
   }
 
-  async componentDidMount() {
-    const questions = await getQuestions();
-    console.log(questions);
-    const categories = await selectCategory();
-    console.log(categories);
-    this.setState({
-      questions: questions.results,
-      categories: categories.trivia_categories
-    });
+  handleAddTrivia = async newTrivData => {
+    const newTriv = await triviaAPI.create(newTrivData);
+    this.setState(state => ({
+      trivias: [...state.trivias, newTriv]
+    }),
+      () => this.props.history.push('/'));
   }
 
   handleLogout = () => {
@@ -37,6 +37,19 @@ class App extends Component {
 
   handleSignupOrLogin = () => {
     this.setState({ user: userService.getUser() });
+  }
+
+  async componentDidMount() {
+    const trivias = await triviaAPI.getAll();
+    const questions = await questionAPI.getQuestions();
+    console.log(questions);
+    const categories = await questionAPI.selectCategory();
+    console.log(categories);
+    this.setState({
+      trivias: trivias,
+      questions: questions.results,
+      categories: categories.trivia_categories
+    });
   }
 
   render() {
@@ -50,6 +63,12 @@ class App extends Component {
           />
         </header>
         <main className="App-main">
+          <Route exact path='/' render={() =>
+            <TriviaListPage
+              trivias={this.state.trivias}
+              handleAddTrivia={this.handleAddTrivia}
+            />
+          } />
           <Route exact path='/signup' render={({ history }) =>
             <SignupPage
               history={history}
@@ -62,11 +81,11 @@ class App extends Component {
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           } />
-          <div className="App-component">
+          <Route exact path='/skills' render={() =>
             <TriviaSelectForm
               questions={this.state.questions}
               categories={this.state.categories} />
-          </div>
+          } />
         </main>
       </div >
     )

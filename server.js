@@ -6,6 +6,8 @@ const logger = require('morgan');
 require('dotenv').config();
 require('./config/database');
 
+const triviasRouter = require('./routes/api/trivias');
+
 const app = express();
 
 app.use(logger('dev'));
@@ -19,6 +21,7 @@ app.use('/api/users', require('./routes/api/users'));
 
 app.use(require('./config/auth'));
 // login protected routes under here
+app.use('/api/trivias', triviasRouter);
 
 // This is the catch all. Comment can be deleted when ready.
 app.get('/*', function (req, res) {

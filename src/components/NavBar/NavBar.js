@@ -5,9 +5,9 @@ import './NavBar.css'
 const NavBar = (props) => {
     let nav = props.user ?
         <div>
-            <Link to='/'>Skills</Link>
+            <Link to=''>Skills</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;
-            <Link to='/login'>Trivia Games</Link>
+            <Link to='/'>Trivia Games</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;
             <Link to='' onClick={props.handleLogout}>Logout</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
