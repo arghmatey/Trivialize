@@ -7,6 +7,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import TriviaListPage from '../TriviaListPage/TriviaListPage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
+import AddTriviaPage from '../AddTriviaPage/AddTriviaPage';
 import userService from '../../utils/userService';
 import TriviaSelectForm from '../../components/TriviaSelectForm/TriviaSelectForm';
 
@@ -41,6 +42,7 @@ class App extends Component {
 
   async componentDidMount() {
     const trivias = await triviaAPI.getAll();
+    console.log(trivias)
     const questions = await questionAPI.getQuestions();
     console.log(questions);
     const categories = await questionAPI.selectCategory();
@@ -56,7 +58,7 @@ class App extends Component {
     return (
       <div>
         <header className="App-header">
-          TRIVIALIZE
+          <h1>TRIVIALIZE</h1>
           <NavBar
             user={this.state.user}
             handleLogout={this.handleLogout}
@@ -86,6 +88,10 @@ class App extends Component {
               questions={this.state.questions}
               categories={this.state.categories} />
           } />
+          <Route exact path='/add' render={() =>
+            <AddTriviaPage
+              handleAddTrivia={this.handleAddTrivia}
+            />} />
         </main>
       </div >
     )
