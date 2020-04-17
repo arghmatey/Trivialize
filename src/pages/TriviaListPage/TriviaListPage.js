@@ -8,6 +8,7 @@ function TriviaListPage(props) {
             <h2>Your Trivia Games</h2>
             <div>
                 {props.trivias.map(trivia =>
+                    props.user._id === trivia.user &&
                     <TriviaListItem
                         trivia={trivia}
                         handleDeleteTrivia={props.handleDeleteTrivia}

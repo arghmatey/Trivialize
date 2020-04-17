@@ -14,7 +14,7 @@ async function index(req, res) {
 
 async function create(req, res) {
     const trivia = await Trivia.create(req.body);
-    res.status(201).josn(trivia);
+    res.status(201).json(trivia);
 }
 
 async function deleteOne(req, res) {

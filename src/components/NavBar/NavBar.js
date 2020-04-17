@@ -5,7 +5,7 @@ import './NavBar.css'
 const NavBar = (props) => {
     let nav = props.user ?
         <div>
-            <Link to=''>Skills</Link>
+            <Link to='/skills'>Skills</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;
             <Link to='/'>Trivia Games</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;

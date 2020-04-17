@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
-import QuestionsPage from '../../pages/QuestionsPage/QuestionsPage';
+import { Link } from 'react-router-dom';
 
 function TriviaSelectForm(props) {
     return (
@@ -12,11 +11,6 @@ function TriviaSelectForm(props) {
                 )}
             </select>
             <Link to='/questions'>Test your knowledge</Link>
-            <Route exact path='/questions' render={() =>
-                <QuestionsPage
-                    questions={props.questions}
-                />
-            } />
         </>
     );
 }

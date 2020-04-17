@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import * as questionAPI from '../../utils/questions-api';
 import * as triviaAPI from '../../utils/trivias-api';
 import NavBar from '../../components/NavBar/NavBar';
@@ -12,16 +12,23 @@ import userService from '../../utils/userService';
 import TriviaSelectForm from '../../components/TriviaSelectForm/TriviaSelectForm';
 import TriviaDetailPage from '../TriviaDetailPage/TriviaDetailPage';
 import EditTriviaPage from '../EditTriviaPage/EditTriviaPage';
+import QuestionsPage from '../QuestionsPage/QuestionsPage';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      user: userService.getUser(),
-      trivias: [],
-      questions: [],
-      categories: []
-    };
+  state = {
+    user: userService.getUser(),
+    trivias: [],
+    questions: [],
+    categories: []
+  };
+
+  handleLogout = () => {
+    userService.logout();
+    this.setState({ user: null });
+  }
+
+  handleSignupOrLogin = () => {
+    this.setState({ user: userService.getUser() });
   }
 
   handleAddTrivia = async newTriviaData => {
@@ -29,7 +36,8 @@ class App extends Component {
     this.setState(state => ({
       trivias: [...state.trivias, newTrivia]
     }),
-      () => this.props.history.push('/'));
+      () => this.props.history.push('/')
+    );
   }
 
   handleUpdateTrivia = async updatedTriviaData => {
@@ -46,17 +54,7 @@ class App extends Component {
     this.setState(state => ({
       trivias: state.trivias.filter(t => t._id !== id)
     }), () =>
-      // this.props.history.push('/')
-      console.log(this.props.history));
-  }
-
-  handleLogout = () => {
-    userService.logout();
-    this.setState({ user: null });
-  }
-
-  handleSignupOrLogin = () => {
-    this.setState({ user: userService.getUser() });
+      this.props.history.push('/'))
   }
 
   async componentDidMount() {
@@ -84,13 +82,17 @@ class App extends Component {
           />
         </header>
         <main className="App-main">
-          <Route exact path='/' render={() =>
-            <TriviaListPage
-              trivias={this.state.trivias}
-              handleDeleteTrivia={this.handleDeleteTrivia}
-              handleAddTrivia={this.handleAddTrivia}
-            />
-          } />
+          <Route exact path='/' render={() => (
+            userService.getUser() ?
+              <TriviaListPage
+                user={this.state.user}
+                trivias={this.state.trivias}
+                handleDeleteTrivia={this.handleDeleteTrivia}
+                handleAddTrivia={this.handleAddTrivia}
+              />
+              :
+              <Redirect to='/login' />
+          )} />
           <Route exact path='/signup' render={({ history }) =>
             <SignupPage
               history={history}
@@ -119,6 +121,11 @@ class App extends Component {
             <EditTriviaPage
               handleUpdateTrivia={this.handleUpdateTrivia}
               location={location}
+            />
+          } />
+          <Route exact path='/questions' render={() =>
+            <QuestionsPage
+              questions={this.state.questions}
             />
           } />
         </main>

@@ -1,3 +1,5 @@
+import tokenService from './tokenService';
+
 const BASE_URL = '/api/trivias';
 
 export function getAll() {
@@ -8,7 +10,10 @@ export function getAll() {
 export function create(trivia) {
     return fetch(BASE_URL, {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        },
         body: JSON.stringify(trivia)
     }).then(res => res.json());
 }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import userService from '../../utils/userService';
 
 class AddTriviaPage extends Component {
     state = {
         formData: {
+            user: userService.getUser(),
             name: '',
             questions: {
                 question: '',
@@ -52,11 +54,13 @@ class AddTriviaPage extends Component {
                     </div>
                     <div>
                         <span>
+                            <label>Question</label>
                             <input
                                 name="question"
                                 value={this.state.formData.questions.question}
                                 onChange={this.handleChangeQuestions}
                             />
+                            <label>Answer</label>
                             <input
                                 name="answer"
                                 value={this.state.formData.questions.answer}
