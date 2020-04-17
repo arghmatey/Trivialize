@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import TriviaListItem from '../../components/TriviaListItem/TriviaListItem'
 
 function TriviaListPage(props) {
     return (
@@ -7,14 +8,11 @@ function TriviaListPage(props) {
             <h2>Your Trivia Games</h2>
             <div>
                 {props.trivias.map(trivia =>
-                    <div key={trivia._id}>
-                        <h3>{trivia.name}</h3>
-                        {trivia.questions.map(question =>
-                            <div key={question._id}>
-                                <span>{question.question}</span>
-                                <span>{question.answer}</span>
-                            </div>)}
-                    </div>
+                    <TriviaListItem
+                        trivia={trivia}
+                        handleDeleteTrivia={props.handleDeleteTrivia}
+                        key={trivia._id}
+                    />
                 )}
             </div>
             <Link to='/add'>CREATE TRIVIA GAME</Link>

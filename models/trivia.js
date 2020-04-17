@@ -10,11 +10,6 @@ const triviaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    numberOfQuestions: {
-        type: Number,
-        min: 5,
-        max: 10
-    },
     questions: [questionsSchema]
 }, {
     timestamps: true

@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-class AddTriviaPage extends Component {
+class EditTriviaPage extends Component {
     state = {
-        formData: {
-            name: '',
-            questions: {
-                question: '',
-                answer: ''
-            }
-        }
-    }
+        invalidForm: false,
+        formData: this.props.location.state.trivia
+    };
 
     formRef = React.createRef();
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.handleAddTrivia(this.state.formData);
+        this.props.handleUpdateTrivia(this.state.formData);
     };
 
     handleChange = e => {
@@ -39,7 +35,7 @@ class AddTriviaPage extends Component {
     render() {
         return (
             <>
-                <h2>Create Trivia Game</h2>
+                <h2>Edit Game</h2>
                 <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
                     <div>
                         <label>Category or Name (required)</label>
@@ -67,12 +63,13 @@ class AddTriviaPage extends Component {
                     <button
                         type="submit"
                         disabled={this.state.invalidForm}>
-                        Create Game
-                    </button>
+                        Save Game
+                    </button>&nbsp;&nbsp;
+                    <Link to='/'>Cancel</Link>
                 </form>
             </>
         )
     }
 };
 
-export default AddTriviaPage;
+export default EditTriviaPage;

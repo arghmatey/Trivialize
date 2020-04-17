@@ -10,7 +10,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import AddTriviaPage from '../AddTriviaPage/AddTriviaPage';
 import userService from '../../utils/userService';
 import TriviaSelectForm from '../../components/TriviaSelectForm/TriviaSelectForm';
-
+import TriviaDetailPage from '../TriviaDetailPage/TriviaDetailPage';
+import EditTriviaPage from '../EditTriviaPage/EditTriviaPage';
 
 class App extends Component {
   constructor() {
@@ -23,12 +24,30 @@ class App extends Component {
     };
   }
 
-  handleAddTrivia = async newTrivData => {
-    const newTriv = await triviaAPI.create(newTrivData);
+  handleAddTrivia = async newTriviaData => {
+    const newTrivia = await triviaAPI.create(newTriviaData);
     this.setState(state => ({
-      trivias: [...state.trivias, newTriv]
+      trivias: [...state.trivias, newTrivia]
     }),
       () => this.props.history.push('/'));
+  }
+
+  handleUpdateTrivia = async updatedTriviaData => {
+    const updatedTrivia = await triviaAPI.update(updatedTriviaData);
+    const newTriviasArray = this.state.trivias.map(t => t._id === updatedTrivia._id ? updatedTrivia : t);
+    this.setState(
+      { trivias: newTriviasArray },
+      () => this.props.history.push('/')
+    );
+  };
+
+  handleDeleteTrivia = async id => {
+    await triviaAPI.deleteOne(id);
+    this.setState(state => ({
+      trivias: state.trivias.filter(t => t._id !== id)
+    }), () =>
+      // this.props.history.push('/')
+      console.log(this.props.history));
   }
 
   handleLogout = () => {
@@ -68,6 +87,7 @@ class App extends Component {
           <Route exact path='/' render={() =>
             <TriviaListPage
               trivias={this.state.trivias}
+              handleDeleteTrivia={this.handleDeleteTrivia}
               handleAddTrivia={this.handleAddTrivia}
             />
           } />
@@ -90,8 +110,17 @@ class App extends Component {
           } />
           <Route exact path='/add' render={() =>
             <AddTriviaPage
-              handleAddTrivia={this.handleAddTrivia}
-            />} />
+              handleAddTrivia={this.handleAddTrivia} />
+          } />
+          <Route exact path='/details' render={({ location }) =>
+            <TriviaDetailPage location={location} />
+          } />
+          <Route expact path='/edit' render={({ location }) =>
+            <EditTriviaPage
+              handleUpdateTrivia={this.handleUpdateTrivia}
+              location={location}
+            />
+          } />
         </main>
       </div >
     )

@@ -41,6 +41,10 @@
   color: #61dafb;
 }
 
+.list-item {
+  border: 1px solid #282c34;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
