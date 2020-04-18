@@ -6,7 +6,10 @@ class AddTriviaPage extends Component {
         formData: {
             user: userService.getUser(),
             name: '',
-            questions: []
+            questions: [{
+                question: '',
+                answer: ''
+            }]
         }
     }
 
