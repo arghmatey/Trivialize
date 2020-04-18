@@ -4,20 +4,20 @@ import './NavBar.css'
 
 const NavBar = (props) => {
     let nav = props.user ?
-        <div>
-            <Link to='/skills'>Skills</Link>
+        <div className="Nav">
+            <Link to='/skills' className="neon-nav">Skills</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;
-            <Link to='/'>Trivia Games</Link>
+            <Link to='/' className="neon-nav">Trivia Games</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;
-            <Link to='' onClick={props.handleLogout}>Logout</Link>
+            <Link to='' onClick={props.handleLogout} className="neon-nav">Logout</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-            <span>Welcome, {props.user.name}</span>
+            <span className="neon-nav">Welcome, {props.user.name}</span>
         </div>
         :
         <div>
-            <Link to='/login'>Login</Link>
+            <Link to='/login' className="neon-nav">Login</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;
-            <Link to='/signup'>Signup</Link>
+            <Link to='/signup' className="neon-nav">Signup</Link>
         </div>;
 
     return (

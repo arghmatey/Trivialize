@@ -75,7 +75,9 @@ class App extends Component {
     return (
       <div>
         <header className="App-header">
-          <h1>TRIVIALIZE</h1>
+          <div className="neon-wrapper">
+            <h1 className="neon-text">TRIVIALIZE</h1>
+          </div>
           <NavBar
             user={this.state.user}
             handleLogout={this.handleLogout}
