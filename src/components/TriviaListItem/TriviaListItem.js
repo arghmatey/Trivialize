@@ -8,8 +8,10 @@ function TriviaListItem({ trivia, handleDeleteTrivia }) {
             {trivia.questions.map((question, idx) =>
                 <div key={question._id}>
                     <span>{(idx + 1)}.</span>
-                    <span>{question.question}</span>
-                    <span>{question.answer}</span>
+                    <span>
+                        <div>Question: {question.question}</div>
+                        <div>Answer: {question.answer}</div>
+                    </span>
                 </div>)}
             <Link to={{
                 pathname: '/details',

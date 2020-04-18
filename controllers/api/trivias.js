@@ -4,7 +4,8 @@ module.exports = {
     index,
     create,
     delete: deleteOne,
-    show
+    show,
+    update
 }
 
 async function index(req, res) {
@@ -25,4 +26,9 @@ async function deleteOne(req, res) {
 async function show(req, res) {
     const trivia = await Trivia.findById(req.params.id);
     res.status(200).json(trivia);
+}
+
+async function update(req, res) {
+    const updateTrivia = await Trivia.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.status(200).json(updateTrivia);
 }

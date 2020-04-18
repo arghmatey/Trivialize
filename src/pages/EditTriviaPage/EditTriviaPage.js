@@ -32,6 +32,38 @@ class EditTriviaPage extends Component {
         });
     };
 
+    handleTextQuestion = i => e => {
+        let questions = [...this.state.formData.questions]
+        questions[i].question = e.target.value
+        console.log(questions)
+        this.setState({
+            formData: {
+                ...this.state.formData,
+                questions
+            }
+        });
+    }
+
+    handleTextAnswer = i => e => {
+        let questions = [...this.state.formData.questions]
+        questions[i].answer = e.target.value
+        console.log(questions)
+        this.setState({
+            formData: {
+                ...this.state.formData,
+                questions
+            }
+        });
+    }
+
+    addQuestion = e => {
+        e.preventDefault()
+        let questions = this.state.formData.questions.push({});
+        this.setState({
+            questions
+        })
+    }
+
     render() {
         return (
             <>
@@ -47,18 +79,23 @@ class EditTriviaPage extends Component {
                         />
                     </div>
                     <div>
-                        <span>
-                            <input
-                                name="question"
-                                value={this.state.formData.questions.question}
-                                onChange={this.handleChangeQuestions}
-                            />
-                            <input
-                                name="answer"
-                                value={this.state.formData.questions.answer}
-                                onChange={this.handleChangeQuestions}
-                            />
-                        </span>
+                        {this.state.formData.questions.map((question, index) => (
+                            <span key={index}>
+                                <input
+                                    name="question"
+                                    type="text"
+                                    onChange={this.handleTextQuestion(index)}
+                                    value={question.question}
+                                />
+                                <input
+                                    name="answer"
+                                    type="text"
+                                    onChange={this.handleTextAnswer(index)}
+                                    value={question.answer}
+                                />
+                            </span>
+                        ))}
+                        <button onClick={this.addQuestion}>Add New Question</button>
                     </div>
                     <button
                         type="submit"
