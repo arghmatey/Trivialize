@@ -1,0 +1,10 @@
+.LoginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-section {
+    padding-top: 10px;
+}

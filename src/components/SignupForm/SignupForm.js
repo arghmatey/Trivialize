@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import './SignupForm.css';
 import { Link } from 'react-router-dom';
+import { Button, TextField } from '@material-ui/core';
 import userService from '../../utils/userService';
 
 class SignupForm extends Component {
@@ -34,15 +36,67 @@ class SignupForm extends Component {
 
     render() {
         return (
-            <div>
-                <header>Sign Up</header>
-                <form onSubmit={this.handleSubmit}>
-                    <input type='text' placeholder='Name' value={this.state.name} name='name' onChange={this.handleChange} />
-                    <input type='email' placeholder='Email' value={this.state.email} name='email' onChange={this.handleChange} />
-                    <input type="password" placeholder='Password' value={this.state.password} name='password' onChange={this.handleChange} />
-                    <input type="password" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
-                    <button disabled={this.isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
-                    <Link to='/'>Cancel</Link>
+            <div className="SignupForm">
+                <h2>Signup</h2>
+                <form autoComplete="off" onSubmit={this.handleSubmit}>
+                    <div>
+                        <TextField
+                            required
+                            name="name"
+                            id="standard-helperText"
+                            fullWidth
+                            label="Name"
+                            onChange={this.handleChange}
+                            value={this.state.name} />
+                    </div>
+                    <div>
+                        <TextField
+                            required
+                            type="email"
+                            name="email"
+                            fullWidth
+                            label="Email"
+                            onChange={this.handleChange}
+                            value={this.state.email} />
+                    </div>
+                    <div>
+                        <TextField
+                            required
+                            type="password"
+                            name="password"
+                            fullWidth
+                            label="Password"
+                            onChange={this.handleChange}
+                            value={this.state.password} />
+                    </div>
+                    <div>
+                        <TextField
+                            required
+                            type="password"
+                            name="passwordConf"
+                            fullWidth
+                            label="Confirm Password"
+                            onChange={this.handleChange}
+                            value={this.state.passwordConf} />
+                    </div>
+                    <div className="button-section">
+                        <Button
+                            variant="outlined"
+                            type="submit"
+                            disabled={this.state.invalidForm}>
+                            Signup
+                        </Button>
+                        <Link
+                            to="/">
+                            <Button
+                                variant="outlined"
+                                color="secondary"
+                                type="submit"
+                                disabled={this.state.invalidForm}>
+                                Cancel
+                            </Button>
+                        </Link>
+                    </div>
                 </form>
             </div>
         );

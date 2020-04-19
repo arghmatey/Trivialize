@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import './LoginPage.css';
+import { Button, TextField } from '@material-ui/core';
 import userService from '../../utils/userService';
 
 class LoginPage extends Component {
@@ -29,13 +30,32 @@ class LoginPage extends Component {
 
     render() {
         return (
-            <div>
-                <header>Log In</header>
+            <div className="LoginForm">
+                <h2>Login</h2>
                 <form onSubmit={this.handleSubmit} >
-                    <input type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
-                    <input type="password" className="form-control" placeholder="Password" value={this.state.pw} name="pw" onChange={this.handleChange} />
-                    <button>Log In</button>&nbsp;&nbsp;&nbsp;
-              <Link to='/'>Cancel</Link>
+                    <TextField
+                        required
+                        type="email"
+                        name="email"
+                        fullWidth
+                        label="Email"
+                        onChange={this.handleChange}
+                        value={this.state.email} />
+                    <TextField
+                        required
+                        type="password"
+                        name="pw"
+                        fullWidth
+                        label="Password"
+                        onChange={this.handleChange}
+                        value={this.state.pw} />
+                    <div className="button-section">
+                        <Button
+                            variant="outlined"
+                            type="submit">
+                            Login
+                        </Button>
+                    </div>
                 </form >
             </div >
         );
