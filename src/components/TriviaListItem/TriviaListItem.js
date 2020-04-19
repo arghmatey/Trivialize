@@ -1,4 +1,5 @@
 import React from 'react';
+import './TriviaListItem.css';
 import { Link } from 'react-router-dom';
 
 function TriviaListItem({ trivia, handleDeleteTrivia }) {

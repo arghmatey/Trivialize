@@ -18,11 +18,18 @@
   }
 }
 
+.neon-wrapper {
+  margin: 25px;
+  border-radius: 5px;
+  box-shadow: 0 0 0.1vw 0.4vw #FBA5B1, 0 0 0.4vw 0.6vw #E97272, 0 0 4vw 0.4vw #d30925, inset 0 0 1.5vw 0.4vw #d30925, inset 0 0 0.4vw 0.2vw #E97272, inset 0 0 0.5vw 0.2vw #FBA5B1;
+}
+
 .neon-text {
   font-family: neon-sign;
+  margin: 15px 8px;
   font-size: 48px;
-  color: #ffd8d8;
-  text-shadow: .1vw 0vw .25vw #ffd8d8, .2vw 0vw .25vw #ffd8d8, .4vw 0vw .25vw #ffd8d8, .1vw 0vw 0vw #F181B2, .2vw 0vw 0vw #F181B2, .4vw 0vw 0vw #F181B2, .1vw 0vw .1vw #F181B2, .2vw 0vw .1vw #F181B2, .4vw 0vw .1vw #F181B2, .1vw 0vw 2vw #F181B2, .2vw 0vw 2vw #F181B2, .4vw 0vw 2vw #F181B2, .1vw 0vw 1vw #F20B70, .2vw 0vw 1vw #F20B70, .4vw 0vw 5vw #F20B70, .1vw 0vw 5vw #F20B70, .2vw 0vw 20vw #F20B70, .4vw 0vw 10vw #F20B70, .1vw 0vw 10vw #F20B70, .2vw 0vw 30vw #F20B70, .4vw 0vw 10vw #F20B70;
+  color: #B7C5FA;
+  text-shadow: 0vw 0vw .25vw #B7C5FA, 0vw 0vw .1vw #6280E7, 0vw 0vw 2vw #6280E7, 0vw 0vw 1vw #2F57DF, 0vw 0vw 5vw #2F57DF, 0vw 0vw 10vw #2F57DF, 0vw 0vw 20vw #2F57DF, 0vw 0vw 30vw #2F57DF;
 }
 
 .App-header {
@@ -52,10 +59,6 @@
 
 .App-link {
   color: #61dafb;
-}
-
-.list-item {
-  border: 1px solid #282c34;
 }
 
 @keyframes App-logo-spin {

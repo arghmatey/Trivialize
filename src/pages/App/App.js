@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Route, Redirect } from 'react-router-dom'
+import './App.css';
 import * as questionAPI from '../../utils/questions-api';
 import * as triviaAPI from '../../utils/trivias-api';
+import userService from '../../utils/userService';
 import NavBar from '../../components/NavBar/NavBar';
+import TriviaSelectForm from '../../components/TriviaSelectForm/TriviaSelectForm';
 import TriviaListPage from '../TriviaListPage/TriviaListPage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import AddTriviaPage from '../AddTriviaPage/AddTriviaPage';
-import userService from '../../utils/userService';
-import TriviaSelectForm from '../../components/TriviaSelectForm/TriviaSelectForm';
 import TriviaDetailPage from '../TriviaDetailPage/TriviaDetailPage';
 import EditTriviaPage from '../EditTriviaPage/EditTriviaPage';
 import QuestionsPage from '../QuestionsPage/QuestionsPage';
@@ -59,11 +59,8 @@ class App extends Component {
 
   async componentDidMount() {
     const trivias = await triviaAPI.getAll();
-    console.log(trivias)
     const questions = await questionAPI.getQuestions();
-    console.log(questions);
     const categories = await questionAPI.selectCategory();
-    console.log(categories);
     this.setState({
       trivias: trivias,
       questions: questions.results,

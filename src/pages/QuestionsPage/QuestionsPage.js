@@ -4,9 +4,6 @@ import QuestionItem from '../../components/QuestionItem/QuestionItem';
 function QuestionsPage(props) {
     return (
         <>
-            <h2>
-                {props.category}
-            </h2>
             <div>
                 {props.questions.map((question, idx) =>
                     <QuestionItem
