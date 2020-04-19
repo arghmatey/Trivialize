@@ -1,0 +1,38 @@
+.question-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.new-question {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0;
+}
+
+.question-number {
+    padding-top: 20px;
+}
+
+.question-answer {
+    padding: 0 10px;
+    width: 260px;
+}
+
+.new-question-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-question-btn {
+    width: 175px;
+}
+
+.button-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

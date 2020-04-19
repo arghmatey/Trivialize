@@ -15,7 +15,8 @@ const triviaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    questions: [questionsSchema]
+    category: String,
+    questions: [questionsSchema],
 }, {
     timestamps: true
 });

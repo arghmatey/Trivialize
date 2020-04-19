@@ -6,14 +6,7 @@ function TriviaListItem({ trivia, handleDeleteTrivia }) {
     return (
         <div className="list-item">
             <h3>{trivia.name}</h3>
-            {trivia.questions.map((question, idx) =>
-                <div key={question._id}>
-                    <span>{(idx + 1)}.</span>
-                    <span>
-                        <div>Question: {question.question}</div>
-                        <div>Answer: {question.answer}</div>
-                    </span>
-                </div>)}
+            <p>{trivia.questions.length} Questions</p>
             <Link to={{
                 pathname: '/details',
                 state: { trivia }

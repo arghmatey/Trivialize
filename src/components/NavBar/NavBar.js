@@ -11,10 +11,10 @@ const NavBar = (props) => {
             &nbsp;&nbsp;|&nbsp;&nbsp;
             <Link to='' onClick={props.handleLogout} className="neon-nav">Logout</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-            <span className="neon-nav">Welcome, {props.user.name}</span>
+            <span className="neon-name">Welcome, {props.user.name}</span>
         </div>
         :
-        <div>
+        <div className="Nav">
             <Link to='/login' className="neon-nav">Login</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;
             <Link to='/signup' className="neon-nav">Signup</Link>

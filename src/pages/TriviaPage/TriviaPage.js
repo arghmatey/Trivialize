@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import TriviaListItem from '../../components/TriviaListItem/TriviaListItem'
 
-function TriviaListPage(props) {
+function TriviaPage(props) {
     return (
         <div>
             <h2>Your Trivia Games</h2>
@@ -21,4 +21,4 @@ function TriviaListPage(props) {
     );
 }
 
-export default TriviaListPage;
+export default TriviaPage;

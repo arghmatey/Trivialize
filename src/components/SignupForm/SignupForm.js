@@ -6,10 +6,12 @@ class SignupForm extends Component {
     state = {
         name: '',
         email: '',
-        password: ''
+        password: '',
+        passwordConf: ''
     };
 
     handleChange = (e) => {
+        this.props.updateMessage('');
         this.setState({
             [e.target.name]: e.target.value
         });
@@ -21,10 +23,13 @@ class SignupForm extends Component {
             await userService.signup(this.state);
             this.props.handleSignupOrLogin();
             this.props.history.push('/');
-            console.log('there was a good thing')
         } catch (err) {
-            console.log('there is an error');
+            this.props.updateMessage(err.message);
         }
+    }
+
+    isFormInvalid() {
+        return !(this.state.name && this.state.email && this.state.password === this.state.passwordConf);
     }
 
     render() {
@@ -35,7 +40,8 @@ class SignupForm extends Component {
                     <input type='text' placeholder='Name' value={this.state.name} name='name' onChange={this.handleChange} />
                     <input type='email' placeholder='Email' value={this.state.email} name='email' onChange={this.handleChange} />
                     <input type="password" placeholder='Password' value={this.state.password} name='password' onChange={this.handleChange} />
-                    <button>Sign Up</button>&nbsp;&nbsp;
+                    <input type="password" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
+                    <button disabled={this.isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
                     <Link to='/'>Cancel</Link>
                 </form>
             </div>
