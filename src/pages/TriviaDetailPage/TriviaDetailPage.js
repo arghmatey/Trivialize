@@ -7,13 +7,14 @@ function TrivaDetailPage(props) {
         <>
             <h2>{trivia.name}</h2>
             <p>{trivia.category}</p>
-            <div>{trivia.questions.map((question, idx) =>
-                <div className="detail-question" key={question._id}>
-                    <div>Q: {question.question}</div><br />
-                    <div>A: {question.answer}</div>
-                </div>
-            )}</div>
-            <div></div>
+            <div>
+                {trivia.questions.map((question, idx) =>
+                    <div className="detail-question" key={question._id}>
+                        <div>Q: {question.question}</div><br />
+                        <div>A: {question.answer}</div>
+                    </div>
+                )}
+            </div>
         </>
     )
 }
