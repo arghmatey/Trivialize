@@ -119,6 +119,7 @@ class App extends Component {
           } />
           <Route expact path='/edit' render={({ location }) =>
             <EditTriviaPage
+              categories={this.state.categories}
               handleUpdateTrivia={this.handleUpdateTrivia}
               location={location}
             />

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import './AddTriviaPage.css';
 import { Button, TextField, MenuItem } from '@material-ui/core';
@@ -9,7 +9,6 @@ class AddTriviaPage extends Component {
         formData: {
             user: userService.getUser(),
             name: '',
-            numberOfQuestions: 5,
             category: '',
             questions: [{
                 question: '',
@@ -21,24 +20,20 @@ class AddTriviaPage extends Component {
     formRef = React.createRef();
 
     handleSubmit = e => {
-        console.log(this.state.formData.questions)
         e.preventDefault();
         this.props.handleAddTrivia(this.state.formData);
     };
 
     handleChange = e => {
         const formData = { ...this.state.formData, [e.target.name]: e.target.value };
-        console.log(formData)
         this.setState({
-            formData,
-            invalidForm: !this.formRef.current.checkValidity()
+            formData
         });
     };
 
     handleTextQuestion = i => e => {
         let questions = [...this.state.formData.questions]
         questions[i].question = e.target.value
-        console.log(questions)
         this.setState({
             formData: {
                 ...this.state.formData,
@@ -93,10 +88,12 @@ class AddTriviaPage extends Component {
                     </div>
                     <div>
                         <TextField
-                            required
+                            name="category"
                             id="standard-select"
+                            required
                             select
                             fullWidth
+                            defaultValue="Category"
                             label="Category"
                             value={this.state.formData.category}
                             onChange={this.handleChange}
@@ -104,14 +101,14 @@ class AddTriviaPage extends Component {
                         >
                             {this.props.categories.map((category, idx) =>
                                 <MenuItem
-                                    value={category.name} key={idx}>{category.name}</MenuItem>
+                                    value={category.name} key={idx} default>{category.name}</MenuItem>
                             )}
                         </TextField>
                     </div>
                     <div className="question-section">
                         {this.state.formData.questions.map((question, idx) => (
-                            <>
-                                <div key={idx} className="new-question">
+                            <Fragment key={idx}>
+                                <div className="new-question">
                                     <div className="question-number">{idx + 1}.</div>
                                     <div className="question-answer">
                                         <TextField
@@ -143,7 +140,7 @@ class AddTriviaPage extends Component {
                                         Delete Question
                                 </Button>
                                 </div>
-                            </>
+                            </Fragment>
                         ))}
                     </div>
                     <div className="new-question-section">
@@ -158,8 +155,7 @@ class AddTriviaPage extends Component {
                     <div className="button-section">
                         <Button
                             variant="outlined"
-                            type="submit"
-                            disabled={this.state.invalidForm}>
+                            type="submit">
                             Create Game
                     </Button>
                         <Link
@@ -167,8 +163,7 @@ class AddTriviaPage extends Component {
                             <Button
                                 variant="outlined"
                                 color="secondary"
-                                type="submit"
-                                disabled={this.state.invalidForm}>
+                                type="submit">
                                 Cancel
                         </Button>
                         </Link>
