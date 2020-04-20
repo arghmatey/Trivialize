@@ -1,7 +1,7 @@
 Trivialize
 -
 
-Trivialize is here for those who would like to become the next big trivia superstar! Well, I guess I shouldn't go that far... but it is here to help you build your personal trivia game database. Create your games fully, with just a question or two for now!
+Trivialize is here for those who would like to become the next big trivia superstar! Well, I guess I shouldn't go that far... but it is here to help you build your personal trivia game database. Create your games fully, or with just a question or two for now!
 
 ![Trivia Page](public/triviapage.png)
 
