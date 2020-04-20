@@ -1,11 +1,20 @@
 import React from 'react';
+import './TriviaPage.css'
+import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import TriviaListItem from '../../components/TriviaListItem/TriviaListItem'
 
 function TriviaPage(props) {
     return (
-        <div>
+        <div className="TriviaPage">
             <h2>Your Trivia Games</h2>
+            <Link to='/add'>
+                <Button
+                    variant="outlined"
+                    type="submit">
+                    Create Trivia Game
+                    </Button>
+            </Link>
             <div>
                 {props.trivias.map(trivia =>
                     props.user._id === trivia.user &&
@@ -16,7 +25,6 @@ function TriviaPage(props) {
                     />
                 )}
             </div>
-            <Link to='/add'>CREATE TRIVIA GAME</Link>
         </div>
     );
 }

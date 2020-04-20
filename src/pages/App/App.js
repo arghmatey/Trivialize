@@ -12,7 +12,6 @@ import LoginPage from '../LoginPage/LoginPage';
 import AddTriviaPage from '../AddTriviaPage/AddTriviaPage';
 import TriviaDetailPage from '../TriviaDetailPage/TriviaDetailPage';
 import EditTriviaPage from '../EditTriviaPage/EditTriviaPage';
-import QuestionsPage from '../QuestionsPage/QuestionsPage';
 
 class App extends Component {
   state = {
@@ -122,11 +121,6 @@ class App extends Component {
               categories={this.state.categories}
               handleUpdateTrivia={this.handleUpdateTrivia}
               location={location}
-            />
-          } />
-          <Route exact path='/questions' render={() =>
-            <QuestionsPage
-              questions={this.state.questions}
             />
           } />
         </main>

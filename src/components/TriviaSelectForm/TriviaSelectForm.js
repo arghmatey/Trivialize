@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 function TriviaSelectForm(props) {
     return (
         <>
+            <h2>Test Your Knowledge</h2>
             <select>
                 {props.categories.map((category, idx) =>
                     <option
                         value={category.id} key={idx}>{category.name}</option>
                 )}
-            </select>
-            <Link to='/questions'>Test your knowledge</Link>
+            </select><br />
+            <div>Under construction</div>
         </>
     );
 }
