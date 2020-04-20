@@ -35,7 +35,7 @@ class App extends Component {
     this.setState(state => ({
       trivias: [...state.trivias, newTrivia]
     }),
-      () => this.props.history.push('/')
+      () => this.props.history.push('/trivias')
     );
   }
 
@@ -44,7 +44,7 @@ class App extends Component {
     const newTriviasArray = this.state.trivias.map(t => t._id === updatedTrivia._id ? updatedTrivia : t);
     this.setState(
       { trivias: newTriviasArray },
-      () => this.props.history.push('/')
+      () => this.props.history.push('/trivias')
     );
   };
 
@@ -53,7 +53,7 @@ class App extends Component {
     this.setState(state => ({
       trivias: state.trivias.filter(t => t._id !== id)
     }), () =>
-      this.props.history.push('/'))
+      this.props.history.push('/trivias'))
   }
 
   async componentDidMount() {
@@ -80,7 +80,7 @@ class App extends Component {
           />
         </header>
         <main className="App-main">
-          <Route exact path='/' render={() => (
+          <Route exact path='/trivias' render={() => (
             userService.getUser() ?
               <TriviaPage
                 user={this.state.user}
@@ -103,11 +103,14 @@ class App extends Component {
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           } />
-          <Route exact path='/skills' render={() =>
-            <TriviaSelectForm
-              questions={this.state.questions}
-              categories={this.state.categories} />
-          } />
+          <Route exact path='/skills' render={() => (
+            userService.getUser() ?
+              <TriviaSelectForm
+                questions={this.state.questions}
+                categories={this.state.categories} />
+              :
+              <Redirect to='/login' />
+          )} />
           <Route exact path='/add' render={() =>
             <AddTriviaPage
               categories={this.state.categories}

@@ -45,7 +45,6 @@ class AddTriviaPage extends Component {
     handleTextAnswer = i => e => {
         let questions = [...this.state.formData.questions]
         questions[i].answer = e.target.value
-        console.log(questions)
         this.setState({
             formData: {
                 ...this.state.formData,

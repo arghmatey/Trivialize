@@ -7,7 +7,7 @@ const NavBar = (props) => {
         <div className="Nav">
             <Link to='/skills' className="neon-nav">Skills</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;
-            <Link to='/' className="neon-nav">Trivia Games</Link>
+            <Link to='/trivias' className="neon-nav">Trivia Games</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;
             <Link to='' onClick={props.handleLogout} className="neon-nav">Logout</Link>
             &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
