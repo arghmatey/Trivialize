@@ -50,7 +50,8 @@ class LoginPage extends Component {
                         value={this.state.pw} />
                     <div className="button-section">
                         <Button
-                            variant="outlined"
+                            color="primary"
+                            variant="contained"
                             type="submit">
                             Login
                         </Button>

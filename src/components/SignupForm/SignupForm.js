@@ -81,7 +81,8 @@ class SignupForm extends Component {
                     </div>
                     <div className="button-section">
                         <Button
-                            variant="outlined"
+                            color="primary"
+                            variant="contained"
                             type="submit"
                             disabled={this.state.invalidForm}>
                             Signup
@@ -89,8 +90,8 @@ class SignupForm extends Component {
                         <Link
                             to="/">
                             <Button
-                                variant="outlined"
                                 color="secondary"
+                                variant="contained"
                                 type="submit"
                                 disabled={this.state.invalidForm}>
                                 Cancel

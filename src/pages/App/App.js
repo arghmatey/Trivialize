@@ -6,6 +6,7 @@ import * as triviaAPI from '../../utils/trivias-api';
 import userService from '../../utils/userService';
 import NavBar from '../../components/NavBar/NavBar';
 import TriviaSelectForm from '../../components/TriviaSelectForm/TriviaSelectForm';
+import AboutPage from '../AboutPage/AboutPage'
 import TriviaPage from '../TriviaPage/TriviaPage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -80,6 +81,11 @@ class App extends Component {
           />
         </header>
         <main className="App-main">
+          <Route exact path='/' render={() =>
+            <AboutPage
+              className="AboutPage"
+            />
+          } />
           <Route exact path='/trivias' render={() => (
             userService.getUser() ?
               <TriviaPage
