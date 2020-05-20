@@ -1,15 +1,37 @@
 import React from 'react';
+import { Link, Route } from 'react-router-dom';
+import TriviaTestPage from '../../pages/TriviaTestPage/TriviaTestPage.js'
 
 function TriviaSelectForm(props) {
     return (
         <>
             <h2>Test Your Knowledge</h2>
-            <select>
+            <div>
                 {props.categories.map((category, idx) =>
-                    <option
-                        value={category.id} key={idx}>{category.name}</option>
-                )}
-            </select><br />
+                    <div className="testWrapper">
+                        <div>
+                            <div>
+                                {category.name}
+                            </div>
+                            <div>Score: 0/10</div>
+                        </div>
+                        <div>
+                            <Link to='/skills/test'>
+                                <button>
+                                    test
+                            </button>
+                            </Link>
+                            <Route exact path='/skills/test' render={() =>
+                                <TriviaTestPage
+                                    category={category}
+                                />} />
+                            <button>
+                                challenge
+                            </button>
+                        </div>
+                    </div>
+                )}<br />
+            </div>
             <div>Under construction</div>
         </>
     );
