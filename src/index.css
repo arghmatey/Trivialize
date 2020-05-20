@@ -21,8 +21,8 @@ a:hover {
   background-color: var(--accent);
 }
 
-a.active {
+/* a.active {
   color: var(--background);
   background-color: var(--black);
   cursor: default;
-}
+} */

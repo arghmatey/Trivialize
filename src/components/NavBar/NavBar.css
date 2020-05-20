@@ -15,7 +15,7 @@
     text-shadow: 0vw 0vw .25vw #a6e9b9, 0vw 0vw .1vw #64d984, 0vw 0vw 2vw #64d984, 0vw 0vw 1vw #22c950, 0vw 0vw 5vw #22c950, 0vw 0vw 10vw #22c950, 0vw 0vw 20vw #22c950, 0vw 0vw 30vw #22c950;
 }
 
-.neon-nav:hover {
+.neon-nav:hover, .neon-active {
     color: #CA6EE2;
     text-shadow: 0vw 0vw .25vw #CA6EE2, 0vw 0vw .1vw #be4ddb, 0vw 0vw 2vw #be4ddb, 0vw 0vw 1vw #b22dd5, 0vw 0vw 5vw #b22dd5, 0vw 0vw 10vw #b22dd5, 0vw 0vw 20vw #b22dd5, 0vw 0vw 30vw #b22dd5;
 }
