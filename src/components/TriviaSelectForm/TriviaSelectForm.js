@@ -3,11 +3,13 @@ import { Link, Route } from 'react-router-dom';
 import TriviaTestPage from '../../pages/TriviaTestPage/TriviaTestPage.js'
 
 function TriviaSelectForm(props) {
+
     return (
         <>
             <h2>Test Your Knowledge</h2>
             <div>
                 {props.categories.map((category, idx) =>
+
                     <div className="testWrapper">
                         <div>
                             <div>
@@ -16,12 +18,12 @@ function TriviaSelectForm(props) {
                             <div>Score: 0/10</div>
                         </div>
                         <div>
-                            <Link to='/skills/test'>
+                            <Link to={`/${category.name}/test`}>
                                 <button>
                                     test
                             </button>
                             </Link>
-                            <Route exact path='/skills/test' render={() =>
+                            <Route exact path={`/${category.name}/test`} render={() =>
                                 <TriviaTestPage
                                     category={category}
                                 />} />
