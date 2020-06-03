@@ -86,17 +86,6 @@ class App extends Component {
               className="AboutPage"
             />
           } />
-          <Route exact path='/trivias' render={() => (
-            userService.getUser() ?
-              <TriviaPage
-                user={this.state.user}
-                trivias={this.state.trivias}
-                handleDeleteTrivia={this.handleDeleteTrivia}
-                handleAddTrivia={this.handleAddTrivia}
-              />
-              :
-              <Redirect to='/login' />
-          )} />
           <Route exact path='/signup' render={({ history }) =>
             <SignupPage
               history={history}
@@ -109,6 +98,17 @@ class App extends Component {
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           } />
+          <Route exact path='/trivias' render={() => (
+            userService.getUser() ?
+              <TriviaPage
+                user={this.state.user}
+                trivias={this.state.trivias}
+                handleDeleteTrivia={this.handleDeleteTrivia}
+                handleAddTrivia={this.handleAddTrivia}
+              />
+              :
+              <Redirect to='/login' />
+          )} />
           <Route exact path='/skills' render={() => (
             userService.getUser() ?
               <TriviaSelectForm
