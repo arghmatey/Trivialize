@@ -14,6 +14,8 @@ import AddTriviaPage from '../AddTriviaPage/AddTriviaPage';
 import TriviaDetailPage from '../TriviaDetailPage/TriviaDetailPage';
 import EditTriviaPage from '../EditTriviaPage/EditTriviaPage';
 
+import TriviaTestPage from '../../pages/TriviaTestPage/TriviaTestPage.js'
+
 class App extends Component {
   state = {
     user: userService.getUser(),
@@ -117,6 +119,9 @@ class App extends Component {
               :
               <Redirect to='/login' />
           )} />
+          <Route exact path={`/test`} render={() =>
+            <TriviaTestPage
+            />} />
           <Route exact path='/add' render={() =>
             <AddTriviaPage
               categories={this.state.categories}

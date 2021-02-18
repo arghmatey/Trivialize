@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
-import TriviaTestPage from '../../pages/TriviaTestPage/TriviaTestPage.js'
+import { Link } from 'react-router-dom';
 
 function TriviaSelectForm(props) {
 
@@ -10,7 +9,7 @@ function TriviaSelectForm(props) {
             <div>
                 {props.categories.map((category, idx) =>
 
-                    <div className="testWrapper">
+                    <div className="testWrapper" key={idx}>
                         <div>
                             <div>
                                 {category.name}
@@ -18,15 +17,12 @@ function TriviaSelectForm(props) {
                             <div>Score: 0/10</div>
                         </div>
                         <div>
-                            <Link to={`/${category.name}/test`}>
+                            <Link to={`/test`}>
                                 <button>
                                     test
-                            </button>
+                                </button>
                             </Link>
-                            <Route exact path={`/${category.name}/test`} render={() =>
-                                <TriviaTestPage
-                                    category={category}
-                                />} />
+
                             <button>
                                 challenge
                             </button>
