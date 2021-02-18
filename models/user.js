@@ -3,6 +3,20 @@ const bcrypt = require('bcrypt');
 
 const SALT_ROUNDS = 6;
 
+const skillsSchema = new mongoose.Schema({
+    category: String,
+    averageScore: {
+        type: Number,
+        default: 0
+    },
+    attempts: {
+        type: Number,
+        default: 0
+    }
+}, {
+    timestamps: true
+});
+
 const userSchema = new mongoose.Schema({
     name: String,
     email: {
@@ -11,7 +25,8 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         unique: true
     },
-    password: String
+    password: String,
+    skills: [skillsSchema],
 }, {
     timestamps: true
 });
