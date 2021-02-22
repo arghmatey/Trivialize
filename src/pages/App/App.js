@@ -13,14 +13,12 @@ import LoginPage from '../LoginPage/LoginPage';
 import AddTriviaPage from '../AddTriviaPage/AddTriviaPage';
 import TriviaDetailPage from '../TriviaDetailPage/TriviaDetailPage';
 import EditTriviaPage from '../EditTriviaPage/EditTriviaPage';
-
 import TriviaTestPage from '../../pages/TriviaTestPage/TriviaTestPage.js'
 
 class App extends Component {
   state = {
     user: userService.getUser(),
     trivias: [],
-    questions: [],
     categories: []
   };
 
@@ -61,11 +59,9 @@ class App extends Component {
 
   async componentDidMount() {
     const trivias = await triviaAPI.getAll();
-    const questions = await questionAPI.getQuestions();
-    const categories = await questionAPI.selectCategory();
+    const categories = await questionAPI.getCategories();
     this.setState({
       trivias: trivias,
-      questions: questions.results,
       categories: categories.trivia_categories
     });
   }
@@ -114,12 +110,11 @@ class App extends Component {
           <Route exact path='/skills' render={() => (
             userService.getUser() ?
               <TriviaSelectForm
-                questions={this.state.questions}
                 categories={this.state.categories} />
               :
               <Redirect to='/login' />
           )} />
-          <Route exact path={`/test`} render={() =>
+          <Route exact path='/test' render={() =>
             <TriviaTestPage
             />} />
           <Route exact path='/add' render={() =>

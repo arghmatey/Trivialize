@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class TriviaTestPage extends Component {
-    render() {
-        return (
-            <p>test</p>
-        );
-    };
-};
+const TriviaTestPage = () => {
+
+    return (
+        <div>test page</div>
+    );
+}
 
 export default TriviaTestPage;

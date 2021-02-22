@@ -30,7 +30,6 @@ function TriviaSelectForm(props) {
                     </div>
                 )}<br />
             </div>
-            <div>Under construction</div>
         </>
     );
 }
