@@ -19,7 +19,10 @@ class App extends Component {
   state = {
     user: userService.getUser(),
     trivias: [],
-    categories: []
+    skillsTest: [],
+    categories: [],
+    correctAnswers: {},
+    score: 0
   };
 
   handleLogout = () => {
@@ -57,6 +60,18 @@ class App extends Component {
       this.props.history.push('/trivias'))
   }
 
+  getSkillsTest = async category => {
+    const questions = await questionAPI.getQuestions(category);
+    const results = questionAPI.randomizeAnswers(questions.results);
+    const correctAnswers = questionAPI.correctAnswers(questions.results);
+    this.setState({ skillsTest: results, correctAnswers })
+  }
+
+  handleScore = (correct) => {
+    const score = (correct * 10); // 10 questions is default for now. 
+    this.setState({ score: score })
+  }
+
   async componentDidMount() {
     const trivias = await triviaAPI.getAll();
     const categories = await questionAPI.getCategories();
@@ -65,6 +80,7 @@ class App extends Component {
       categories: categories.trivia_categories
     });
   }
+
 
   render() {
     return (
@@ -110,12 +126,15 @@ class App extends Component {
           <Route exact path='/skills' render={() => (
             userService.getUser() ?
               <TriviaSelectForm
-                categories={this.state.categories} />
+                categories={this.state.categories}
+                getSkillsTest={this.getSkillsTest} />
               :
               <Redirect to='/login' />
           )} />
           <Route exact path='/test' render={() =>
             <TriviaTestPage
+              skillsTest={this.state.skillsTest}
+              correctAnswers={this.state.correctAnswers}
             />} />
           <Route exact path='/add' render={() =>
             <AddTriviaPage

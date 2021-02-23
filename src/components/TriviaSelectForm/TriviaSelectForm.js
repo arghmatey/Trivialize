@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 
 function TriviaSelectForm(props) {
 
+    const handleTestSkills = async e => {
+        props.getSkillsTest(e.target.id);
+    }
+
     return (
         <>
             <h2>Test Your Knowledge</h2>
@@ -17,8 +21,8 @@ function TriviaSelectForm(props) {
                             <div>Score: 0/10</div>
                         </div>
                         <div>
-                            <Link to={`/test`}>
-                                <button>
+                            <Link to={`/test`} onClick={handleTestSkills}>
+                                <button id={category.id}>
                                     test
                                 </button>
                             </Link>
