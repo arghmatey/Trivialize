@@ -3,9 +3,9 @@ export function getCategories() {
     return fetch(endpoint).then(res => res.json());
 }
 
-export function getTrivia(formData) {
+export function getQuestions(category) {
     const endpoint = 'https://opentdb.com/api.php?';
-    return fetch(`${endpoint}amount=${formData.amount}&category=${formData.category}&difficulty=${formData.difficulty}`).then(res => res.json()).catch((error) => {
+    return fetch(`${endpoint}amount=10&category=${category}`).then(res => res.json()).catch((error) => {
         console.error('Error:', error);
     });
 };
