@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 function TriviaSelectForm(props) {
@@ -15,21 +16,27 @@ function TriviaSelectForm(props) {
 
                     <div className="testWrapper" key={idx}>
                         <div>
-                            <div>
-                                {category.name}
-                            </div>
-                            <div>Score: 0/10</div>
+                            <h4>{category.name}</h4>
+                            <div>Recent score: {props.skillsTestScore}%</div>
+                            <div>Average score: {props.averageScore}%</div>
+                            <div>Total Games: {props.totalGames}</div>
                         </div>
                         <div>
                             <Link to={`/test`} onClick={handleTestSkills}>
-                                <button id={category.id}>
-                                    test
-                                </button>
+                                <Button
+                                    id={category.id}
+                                    variant="outlined"
+                                    type="submit">
+                                    Test
+                                </Button>
                             </Link>
 
-                            <button>
-                                challenge
-                            </button>
+                            <Button
+                                id={category.id}
+                                variant="outlined"
+                                type="submit">
+                                Challenge
+                            </Button>
                         </div>
                     </div>
                 )}<br />
