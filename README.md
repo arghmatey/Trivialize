@@ -13,8 +13,7 @@ React, Express, Node.js, MongoDB, Mongoose, Javascript, Material UI, HTML, CSS
 ---
 
 #### Getting Started:
-Check it out on [Heroku](https://trivialize-app.herokuapp.com/).
-See the progress process on [Trello](https://trello.com/b/dCfEldWq). View that sweet sweet code on [Github](https://github.com/arghmatey/trivialize).
+Check it out on [Heroku](https://trivialize-app.herokuapp.com/). View that sweet sweet code on [Github](https://github.com/arghmatey/trivialize).
 
 ---
 
