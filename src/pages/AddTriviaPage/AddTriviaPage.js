@@ -88,7 +88,7 @@ class AddTriviaPage extends Component {
                     <div>
                         <TextField
                             name="category"
-                            id="standard-select"
+                            id="standard-select-helper"
                             required
                             select
                             fullWidth
@@ -156,7 +156,7 @@ class AddTriviaPage extends Component {
                             variant="outlined"
                             type="submit">
                             Create Game
-                    </Button>
+                        </Button>
                         <Link
                             to="/">
                             <Button
