@@ -2,20 +2,20 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-const TriviaResults = (props) => {
+const QuizResults = (props) => {
 
     return (
         <div>
             <div>You scored: {props.skillsTestScore}%</div>
-            <Link to={`/skills`}>
+            <Link to={`/quiz`}>
                 <Button
                     variant="outlined"
                 >
-                    Back to skills
+                    Take another!
             </Button>
             </Link>
         </div>
     )
 }
 
-export default TriviaResults;
+export default QuizResults;

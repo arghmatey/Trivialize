@@ -8,7 +8,7 @@ function TriviaPage(props) {
     return (
         <div className="TriviaPage">
             <h2>Your Trivia Games</h2>
-            <Link to='/add'>
+            <Link to='/create'>
                 <Button
                     variant="outlined"
                     type="submit">

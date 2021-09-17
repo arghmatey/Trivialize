@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -10,25 +10,19 @@ const TriviaTestPage = (props) => {
         setSubmitted({ ...submitted, [e.target.name]: e.target.value });
     }
 
-    const handleAnswerCheck = e => {
+    const handleAnswerCheck = () => {
         let correct = 0;
-        for (const key in submitted) {
-            if (submitted[key] === props.correctAnswers[key]) {
+        for (const index in submitted) {
+            if (submitted[index] === props.correctAnswers[index]) {
                 correct++
-            } else {
-                console.log('wrong')
             }
         }
-        props.handleScore(correct);
+        props.handleScore(correct, props.quiz.length);
     }
-
-    useEffect(() => {
-        console.log('hola')
-    }, []);
 
     return (
         <div>
-            {props.skillsTest.map((t, idx) =>
+            {props.quiz.map((t, idx) =>
                 <div className="list-item" key={idx}>
                     <h4>{t.question}</h4>
 
@@ -47,9 +41,9 @@ const TriviaTestPage = (props) => {
                 </div>
             )}
 
-            <Link to={`/results`} onClick={handleAnswerCheck}>
+            <Link to={`/quiz/results`} onClick={handleAnswerCheck}>
                 <Button
-                    disabled={submittedLength !== 10}
+                    disabled={submittedLength !== props.quiz.length}
                     variant="outlined"
                     type="submit">
                     Check Answers

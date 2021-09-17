@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom'
 import './App.css';
-import * as questionAPI from '../../utils/questions-api';
+import * as quizAPI from '../../utils/quizApiService';
 import * as triviaAPI from '../../utils/trivias-api';
 import userService from '../../utils/userService';
 import NavBar from '../../components/NavBar/NavBar';
-import TriviaSelectForm from '../../components/TriviaSelectForm/TriviaSelectForm';
-import AboutPage from '../AboutPage/AboutPage'
-import TriviaPage from '../TriviaPage/TriviaPage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
+import AboutPage from '../AboutPage/AboutPage'
+import QuizSelectPage from '../../pages/QuizSelectPage';
+import QuizPage from '../../pages/QuizPage.js'
 import AddTriviaPage from '../AddTriviaPage/AddTriviaPage';
+import TriviaPage from '../TriviaPage/TriviaPage';
 import TriviaDetailPage from '../TriviaDetailPage/TriviaDetailPage';
 import EditTriviaPage from '../EditTriviaPage/EditTriviaPage';
-import TriviaTestPage from '../../pages/TriviaTestPage/TriviaTestPage.js'
-import TriviaResults from '../../components/TriviaResults';
+import QuizResults from '../../components/QuizResults';
 
 class App extends Component {
   state = {
     user: userService.getUser(),
     trivias: [],
     categories: [],
-    skillsTest: [],
+    quiz: [],
     correctAnswers: {},
     skillsTestScore: 0,
     averageScore: 0,
-    totalGames: 0
+    totalGames: 0,
   };
 
   handleLogout = () => {
@@ -43,7 +43,7 @@ class App extends Component {
     this.setState(state => ({
       trivias: [...state.trivias, newTrivia]
     }),
-      () => this.props.history.push('/trivias')
+      () => this.props.history.push('/quiz')
     );
   }
 
@@ -53,7 +53,7 @@ class App extends Component {
     const newTriviasArray = this.state.trivias.map(t => t._id === updatedTrivia._id ? updatedTrivia : t);
     this.setState(
       { trivias: newTriviasArray },
-      () => this.props.history.push('/trivias')
+      () => this.props.history.push('/quiz')
     );
   };
 
@@ -63,38 +63,34 @@ class App extends Component {
     this.setState(state => ({
       trivias: state.trivias.filter(t => t._id !== id)
     }), () =>
-      this.props.history.push('/trivias'))
+      this.props.history.push('/quiz'))
   }
 
-  // retrieves questions, scrambles answers, retrieves correct answers
-  getSkillsTest = async category => {
-    const questions = await questionAPI.getQuestions(category);
-    const results = questionAPI.randomizeAnswers(questions.results);
-    const correctAnswers = questionAPI.correctAnswers(questions.results);
-    this.setState({ skillsTest: results, correctAnswers })
+  // retrieves quiz questions based on user selected options, scrambles answers, retrieves correct answers
+  generateQuiz = async options => {
+    const questions = await quizAPI.getQuizQuestions(options);
+    const results = quizAPI.randomizeAnswers(questions.results);
+    const correctAnswers = quizAPI.correctAnswers(questions.results);
+    this.setState(
+      { quiz: results, correctAnswers },
+      () => this.props.history.push('/quiz/start')
+      )
   }
 
   // calculates test score and tallys total games
-  handleScore = (correct) => {
-    const score = (correct * 10); // 10 questions is default for now.
+  handleScore = (correct, total) => {
+    const score = ((correct * total) * 100);
     this.setState(
       {
         skillsTestScore: score,
         totalGames: this.state.totalGames + 1
-      },
-      this.handleAverage
+      }
     );
-  }
-
-  // average of all tests taken for chosen category
-  handleAverage = () => {
-    const average = ((this.state.averageScore + this.state.skillsTestScore) / (10 * this.state.totalGames));
-    this.setState({ averageScore: average })
   }
 
   async componentDidMount() {
     const trivias = await triviaAPI.getAll();
-    const categories = await questionAPI.getCategories();
+    const categories = await quizAPI.getCategories();
     this.setState({
       trivias: trivias,
       categories: categories.trivia_categories
@@ -131,7 +127,7 @@ class App extends Component {
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           } />
-          <Route exact path='/trivias' render={() => (
+          <Route exact path='/manage' render={() => (
             userService.getUser() ?
               <TriviaPage
                 user={this.state.user}
@@ -142,7 +138,7 @@ class App extends Component {
               :
               <Redirect to='/login' />
           )} />
-          <Route exact path='/add' render={() =>
+          <Route exact path='/create' render={() =>
             <AddTriviaPage
               categories={this.state.categories}
               handleAddTrivia={this.handleAddTrivia} />
@@ -158,27 +154,24 @@ class App extends Component {
             />
           } />
 
-          <Route exact path='/skills' render={() => (
+          <Route exact path='/quiz' render={() => (
             userService.getUser() ?
-              <TriviaSelectForm
+              <QuizSelectPage
                 categories={this.state.categories}
-                skillsTestScore={this.state.skillsTestScore}
-                averageScore={this.state.averageScore}
-                totalGames={this.state.totalGames}
-                getSkillsTest={this.getSkillsTest} />
+                generateQuiz={this.generateQuiz}
+              />
               :
               <Redirect to='/login' />
           )} />
-          <Route exact path='/test' render={() =>
-            <TriviaTestPage
-              skillsTest={this.state.skillsTest}
+          <Route exact path='/quiz/start' render={() => (
+            <QuizPage
+              quiz={this.state.quiz}
               correctAnswers={this.state.correctAnswers}
               handleScore={this.handleScore}
-              handleAverage={this.handleAverage}
-            />
-          } />
-          <Route exact path='/results' render={() =>
-            <TriviaResults
+              />
+          )} />
+          <Route exact path='/quiz/results' render={() =>
+            <QuizResults
               skillsTestScore={this.state.skillsTestScore}
             />
           } />
