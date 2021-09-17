@@ -1,23 +1,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const Schema = mongoose.Schema
 
 const SALT_ROUNDS = 6;
 
-const skillsSchema = new mongoose.Schema({
-    category: String,
-    averageScore: {
-        type: Number,
-        default: 0
-    },
-    attempts: {
-        type: Number,
-        default: 0
-    }
-}, {
-    timestamps: true
-});
-
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     name: String,
     email: {
         type: String,
@@ -25,8 +12,7 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         unique: true
     },
-    password: String,
-    skills: [skillsSchema],
+    password: String
 }, {
     timestamps: true
 });

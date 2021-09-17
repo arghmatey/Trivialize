@@ -4,6 +4,6 @@ const usersCtrl = require('../../controllers/api/users');
 
 router.post('/signup', usersCtrl.signup); // user signs up
 router.post('/login', usersCtrl.login); // user logs in
-router.post('/skills', usersCtrl.skills); // post skills 
+router.use(require('../../config/auth'));
 
 module.exports = router;
