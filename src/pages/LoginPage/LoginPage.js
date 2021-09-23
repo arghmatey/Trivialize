@@ -16,6 +16,13 @@ class LoginPage extends Component {
         });
     }
 
+    handleDemoUser = async () => {
+        this.setState({
+            email: process.env.REACT_APP_DEMO_USER,
+            pw: process.env.REACT_APP_DEMO_PASSWORD
+        });
+    }
+
     handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -54,6 +61,12 @@ class LoginPage extends Component {
                             variant="contained"
                             type="submit">
                             Login
+                        </Button>
+                        <Button
+                            color="secondary"
+                            variant="contained"
+                            onClick={this.handleDemoUser}>
+                            Demo User
                         </Button>
                     </div>
                 </form >
