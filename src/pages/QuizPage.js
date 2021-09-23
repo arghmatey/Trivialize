@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-const TriviaTestPage = (props) => {
+const QuizPage = (props) => {
     const [submitted, setSubmitted] = useState({});
     const submittedLength = Object.values(submitted).length;
 
@@ -54,4 +54,4 @@ const TriviaTestPage = (props) => {
     );
 }
 
-export default TriviaTestPage;
+export default QuizPage;

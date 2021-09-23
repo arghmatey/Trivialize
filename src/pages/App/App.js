@@ -43,7 +43,7 @@ class App extends Component {
     this.setState(state => ({
       trivias: [...state.trivias, newTrivia]
     }),
-      () => this.props.history.push('/quiz')
+      () => this.props.history.push('/manage')
     );
   }
 
@@ -53,7 +53,7 @@ class App extends Component {
     const newTriviasArray = this.state.trivias.map(t => t._id === updatedTrivia._id ? updatedTrivia : t);
     this.setState(
       { trivias: newTriviasArray },
-      () => this.props.history.push('/quiz')
+      () => this.props.history.push('/manage')
     );
   };
 
@@ -63,7 +63,7 @@ class App extends Component {
     this.setState(state => ({
       trivias: state.trivias.filter(t => t._id !== id)
     }), () =>
-      this.props.history.push('/quiz'))
+      this.props.history.push('/manage'))
   }
 
   // retrieves quiz questions based on user selected options, scrambles answers, retrieves correct answers
@@ -155,13 +155,10 @@ class App extends Component {
           } />
 
           <Route exact path='/quiz' render={() => (
-            userService.getUser() ?
               <QuizSelectPage
                 categories={this.state.categories}
                 generateQuiz={this.generateQuiz}
               />
-              :
-              <Redirect to='/login' />
           )} />
           <Route exact path='/quiz/start' render={() => (
             <QuizPage
