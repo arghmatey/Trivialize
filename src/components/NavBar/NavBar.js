@@ -30,6 +30,11 @@ const NavBar = (props) => {
         :
         <div className="Nav">
             <NavLink 
+                to='/quiz' 
+                className="neon-nav"
+                activeClassName="neon-nav-active">Quizzes</NavLink>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <NavLink 
                 to='/login' 
                 className="neon-nav">Login</NavLink>
             &nbsp;&nbsp;|&nbsp;&nbsp;
