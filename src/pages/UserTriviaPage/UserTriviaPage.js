@@ -1,10 +1,10 @@
 import React from 'react';
-import './TriviaPage.css'
+import './UserTriviaPage.css'
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import TriviaListItem from '../../components/TriviaListItem/TriviaListItem'
 
-function TriviaPage(props) {
+function UserTriviaPage(props) {
     return (
         <div className="TriviaPage">
             <h2>Your Trivia Games</h2>
@@ -29,4 +29,4 @@ function TriviaPage(props) {
     );
 }
 
-export default TriviaPage;
+export default UserTriviaPage;
