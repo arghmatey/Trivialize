@@ -9,12 +9,11 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import AboutPage from '../AboutPage/AboutPage'
 import QuizSelectPage from '../../pages/QuizSelectPage';
-import QuizPage from '../../pages/QuizPage.js'
+import QuizPage from '../../pages/QuizPage/QuizPage.js'
 import AddTriviaPage from '../AddTriviaPage/AddTriviaPage';
-import TriviaPage from '../TriviaPage/TriviaPage';
+import UserTriviaPage from '../UserTriviaPage/UserTriviaPage';
 import TriviaDetailPage from '../TriviaDetailPage/TriviaDetailPage';
 import EditTriviaPage from '../EditTriviaPage/EditTriviaPage';
-import QuizResults from '../../components/QuizResults';
 
 class App extends Component {
   state = {
@@ -23,7 +22,7 @@ class App extends Component {
     categories: [],
     quiz: [],
     correctAnswers: {},
-    skillsTestScore: 0,
+    score: null,
     averageScore: 0,
     totalGames: 0,
   };
@@ -73,19 +72,23 @@ class App extends Component {
     const correctAnswers = quizAPI.correctAnswers(questions.results);
     this.setState(
       { quiz: results, correctAnswers },
-      () => this.props.history.push('/quiz/start')
-      )
+      () => this.props.history.push('/quiz/custom')
+    )
   }
 
-  // calculates test score and tallys total games
-  handleScore = (correct, total) => {
-    const score = ((correct * total) * 100);
-    this.setState(
-      {
-        skillsTestScore: score,
-        totalGames: this.state.totalGames + 1
-      }
-    );
+  // calculates score
+  handleScore = (correct) => {
+    const score = ((correct / this.state.quiz.length) * 100);
+    this.setState({ score: score })
+  }
+
+  // resets state to allow a new quiz to be selected
+  handleNewSelect = () => {
+    this.setState({
+      quiz: [],
+      correctAnswers: {},
+      score: null
+    })
   }
 
   async componentDidMount() {
@@ -110,26 +113,30 @@ class App extends Component {
           />
         </header>
         <main className="App-main">
+
           <Route exact path='/' render={() =>
             <AboutPage
               className="AboutPage"
             />
           } />
+
           <Route exact path='/signup' render={({ history }) =>
             <SignupPage
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           } />
+
           <Route exact path='/login' render={({ history }) =>
             <LoginPage
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           } />
+
           <Route exact path='/manage' render={() => (
             userService.getUser() ?
-              <TriviaPage
+              <UserTriviaPage
                 user={this.state.user}
                 trivias={this.state.trivias}
                 handleDeleteTrivia={this.handleDeleteTrivia}
@@ -138,14 +145,17 @@ class App extends Component {
               :
               <Redirect to='/login' />
           )} />
+
           <Route exact path='/create' render={() =>
             <AddTriviaPage
               categories={this.state.categories}
               handleAddTrivia={this.handleAddTrivia} />
           } />
+
           <Route exact path='/details' render={({ location }) =>
             <TriviaDetailPage location={location} />
           } />
+
           <Route expact path='/edit' render={({ location }) =>
             <EditTriviaPage
               categories={this.state.categories}
@@ -160,18 +170,15 @@ class App extends Component {
                 generateQuiz={this.generateQuiz}
               />
           )} />
-          <Route exact path='/quiz/start' render={() => (
+          <Route exact path='/quiz/custom' render={() => (
             <QuizPage
               quiz={this.state.quiz}
               correctAnswers={this.state.correctAnswers}
               handleScore={this.handleScore}
+              score={this.state.score}
+              handleNewSelect={this.handleNewSelect}
               />
           )} />
-          <Route exact path='/quiz/results' render={() =>
-            <QuizResults
-              skillsTestScore={this.state.skillsTestScore}
-            />
-          } />
         </main>
       </div >
     )

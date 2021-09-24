@@ -8,7 +8,6 @@ function QuizSelectPage(props) {
         difficulty: "",
         type: ""
     });
-    // const [validForm, setValidForm] = useState(false)
 
     const handleChange = e => {
         const updatedOptions = { ...options, [e.target.name]: e.target.value };
