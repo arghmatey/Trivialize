@@ -1,0 +1,11 @@
+.answers-list {
+    list-style: none;
+    padding-inline-start: 0px;
+}
+
+.answer {
+    height: 100%;
+    outline: 1px solid #B7C5FA;
+    padding: 10px;
+    margin: 5px;
+}
